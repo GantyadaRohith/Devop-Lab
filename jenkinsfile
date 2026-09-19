@@ -31,12 +31,30 @@ pipeline {
 
     post {
 
-        success {
-            echo 'CI Pipeline completed successfully!'
-        }
-
-        failure {
-            echo 'CI Pipeline failed!'
-        }
+    success {
+        emailext(
+            subject: "SUCCESS: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+            body: """
+                <h2>Jenkins Build Successful</h2>
+                <p>Job: ${env.JOB_NAME}</p>
+                <p>Build Number: ${env.BUILD_NUMBER}</p>
+                <p>The CI pipeline completed successfully.</p>
+            """,
+            to: "YOUR_EMAIL@gmail.com"
+        )
     }
+
+    failure {
+        emailext(
+            subject: "FAILURE: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+            body: """
+                <h2>Jenkins Build Failed</h2>
+                <p>Job: ${env.JOB_NAME}</p>
+                <p>Build Number: ${env.BUILD_NUMBER}</p>
+                <p>Please check the Jenkins console output.</p>
+            """,
+            to: "YOUR_EMAIL@gmail.com"
+        )
+    }
+}
 }
