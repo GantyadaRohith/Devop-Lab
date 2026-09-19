@@ -53,7 +53,7 @@ pipeline {
                 <p>Build Number: ${env.BUILD_NUMBER}</p>
                 <p>Please check the Jenkins console output.</p>
             """,
-            to: "YOUR_EMAIL@gmail.com"
+            to: "gantyadarohith69@gmail.com"
         )
     }
 }
